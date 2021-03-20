@@ -1,6 +1,13 @@
 const express = require('express'); //Importing express
+const connectDB = require('./config/db');
 
 const app = express();
+
+//Connect Databse
+connectDB();
+
+//Init middleware
+app.use(express.json({ extended: false }));
 
 const PORT = process.env.port || 5000;
 
