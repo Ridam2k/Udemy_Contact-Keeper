@@ -15,6 +15,33 @@ export default (state, action) => {
 				...state,
 				contacts: [...state.contacts, action.payload], //Adds the received contact to the the existing contacts
 			};
+		case DELETE_CONTACT:
+			return {
+				...state,
+				contacts: state.contacts.filter(
+					(contact) => contact.id !== action.payload
+				),
+				//Assign all contacts whose id is not the one passed to the state 'contacts' =>deleting the passed contact
+			};
+		case SET_CURRENT:
+			return {
+				...state,
+				current: action.payload,
+			};
+		case CLEAR_CURRENT:
+			return {
+				...state,
+				current: null,
+			};
+		case UPDATE_CONTACT:
+			return {
+				...state,
+				contacts: state.contacts.map((contact) =>
+					contact.id === action.payload.id ? action.payload : contact
+				),
+				//Find the contact with the matching id : return the payload info for that particular contact
+			};
+
 		default:
 			return state;
 	}
